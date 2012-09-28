@@ -1,9 +1,13 @@
 import math
 
 def distance(x=0,y=0,z=0) :
+  """ compute the distance between the origin and a point in 3-d space 
+  """
   return math.sqrt(x*x + y*y + z*z)
 
 def distanceBetween(p1,p2) :
+  """ compute the distacne between two points. Points are expressed as tuples.
+  """
   return distance(p1[0]-p2[0],p1[1]-p2[1],p1[2]-p2[2])
 
 def monopole_potential(Io,sigma,r) :
