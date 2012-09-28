@@ -9,7 +9,7 @@ def length(p) :
 def subtract(p1,p2) :
   """ compute the position of p2 relative to p1. Points are expressed as tuples.
   """
-  return (p1[0]-p2[0],p1[1]-p2[1],p1[2]-p2[2])
+  return (p2[0]-p1[0],p2[1]-p1[1],p2[2]-p1[2])
 
 def monopole_potential(Io,sigma,r) :
   """ compute the potential in volts at a distance r from a monopole current source
