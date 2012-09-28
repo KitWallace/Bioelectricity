@@ -17,4 +17,3 @@ phi2 = monopole_potential(-Io,sigma,rx)
 potential = phi1 + phi2 
 print r,rx,sigma,phi1,phi2,potential,"Volts"
 
-
