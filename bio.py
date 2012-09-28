@@ -1,14 +1,15 @@
 import math
 
-def distance(x=0,y=0,z=0) :
+def length(p) :
   """ compute the distance between the origin and a point in 3-d space 
+  p is a tuble (x, y, z)
   """
-  return math.sqrt(x*x + y*y + z*z)
+  return math.sqrt(p[0]*p[0] + p[1]*p[1] + p[2]*p[2])
 
-def distanceBetween(p1,p2) :
-  """ compute the distacne between two points. Points are expressed as tuples.
+def subtract(p1,p2) :
+  """ compute the position of p2 relative to p1. Points are expressed as tuples.
   """
-  return distance(p1[0]-p2[0],p1[1]-p2[1],p1[2]-p2[2])
+  return (p1[0]-p2[0],p1[1]-p2[1],p1[2]-p2[2])
 
 def monopole_potential(Io,sigma,r) :
   """ compute the potential in volts at a distance r from a monopole current source
