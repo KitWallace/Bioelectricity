@@ -20,3 +20,15 @@ def monopole_potential(Io,sigma,r) :
   """
   return Io / (4 * math.pi * sigma *  r )
 
+def dipole_potential(Io,sigma,r,d,theta) :
+  """ compute the potential in volts at a distance r angle theta, from a dipole 
+
+  Io current in amp
+  sigma  - conductivity in ohm-1 m-1
+  r distance in m
+  d separation of the dipole m 
+  theta angle in radians between point and the axis of the dipole (0 is at right angles to axis of the dipole)
+  dimensionally  of the equation is amp m / (ohm-1 m-1 m2)  = amp ohm  = volt
+  """
+  return Io * d * math.cos(theta) / (4 * math.pi * sigma * r * r)
+
