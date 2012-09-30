@@ -17,7 +17,7 @@ sigma = 1.0 / rho
 
 for i in range(1,7) :
   rx = bio.length((d,0,r))
-  theta = math.asin(d / 2 / r)
+  theta = math.acos(d / 2 / r)
   m1_potential = bio.monopole_potential(Io,sigma,r) + bio.monopole_potential(-Io,sigma,rx) 
   m2_potential = bio.dipole_potential(Io,sigma,r, d, theta)
   print r,rx, theta, m1_potential,m2_potential
