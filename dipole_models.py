@@ -19,7 +19,7 @@ for i in range(1,7) :
   rx = bio.length((d,0,r))
   theta = math.asin(d / 2 / r)
   m1_potential = bio.monopole_potential(Io,sigma,r) + bio.monopole_potential(-Io,sigma,rx) 
-  m2_potential = bio.dipole_potential(Io,sigma,r, d, math.radians(theta))
+  m2_potential = bio.dipole_potential(Io,sigma,r, d, theta)
   print r,rx, theta, m1_potential,m2_potential
   d = d / 10
 
