@@ -55,7 +55,7 @@ def Nernst_ion_equilibrium (ion, T = 25) :
        return the symbol and the computed Voltage between interior and exterior
    """
    (symbol,valance,internal,external) = ion
-   Vm = valance * RToverF(T) * math.log(external / internal)
+   Vm = valance * RToverF(T) * math.log(float(external) / float(internal))
    return (symbol,Vm)
 
 def Nernst_membrane_equilibrium (ions,T = 25) :
