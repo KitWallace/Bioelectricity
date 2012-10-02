@@ -1,5 +1,16 @@
 import math
 
+#  constants
+F =  9.64853365E4         # Faraday  units: C mol-1  source : http://physics.nist.gov/cgi-bin/cuu/Value?f
+R =  8.3144621            # Gas constant units: J K-1 mol-1   source: http://physics.nist.gov/cgi-bin/cuu/Value?r
+T0 = 273.15               # 0 C units: degrees K  source: http://www1.bipm.org/en/si/si_brochure/chapter2/2-1/2-1-1/kelvin.html
+
+def RToverF(Tc) :
+  """ the ratio RT/F is a function of Tc, the temperature in degrees Celcius 
+  dimension is V 
+  """
+  return  R * (T0+ Tc ) / F
+
 def length(p) :
   """ compute the distance between the origin and a point in 3-d space 
   p is a tuble (x, y, z)
@@ -31,4 +42,26 @@ def dipole_potential(Io,sigma,r,d,theta) :
   dimensionally  of the equation is amp m / (ohm-1 m-1 m2)  = amp ohm  = volt
   """
   return Io * d * math.cos(theta) / (4 * math.pi * sigma * r * r)
+
+
+def Nernst_ion_equilibrium (ion, T = 25) :
+   """ ion concentration across a membrane is represented by a tuple (symbol, valance, internal and external concentration )
+       symbol eg "K+"
+       valance is the sign of the ion 
+       internal is the molar concentration of the ion interior to the cell
+       exterior is the molar concentration of the ion external to the cell 
+       units of concentration are irrelevant since the ratio of concentrations is used but typically expressed in mol m-3
+       T is the temperature in degrees Celcius
+       return the symbol and the computed Voltage between interior and exterior
+   """
+   (symbol,valance,internal,external) = ion
+   Vm = valance * RToverF(T) * math.log(external / internal)
+   return (symbol,Vm)
+
+def Nernst_membrane_equilibrium (ions,T = 25) :
+   """
+   ions is a list of ion concentrations 
+   return a list of ion potentials 
+   """
+   return [ Nernst_ion_equilibrium(ion,T) for ion in ions ]
 
