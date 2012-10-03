@@ -6,13 +6,18 @@ length = 100E-6  # 100 micros
 area = math.pi * diameter * length
 print "area=",area
 
-Cm = 1E-6/ 1E-4   # 1 micro farad / cm2  in F/m2
-Rm = 1500 * 1E-4  # ohm - cm2  in ohm - m2
-print "Rm=",Rm, "Cm=",Cm
+Cm = 1E-6  # 1 micro farad / cm2
+Rm = 1500  # 1500 ohm - cm2  
+print "Rm=",Rm, "Cm=",Cm, " in cgs units"
 
-R = Rm / area 
-C = Cm * area
-print "R=",R, "C=",C
+# copnvert to MKS
+Cm_mks = 1E-6/ 1E-4   #  in F/m2
+Rm_mks = 1500 * 1E-4  # in ohm - m2
+print "Rm=",Rm_mks, "Cm=",Cm_mks," in MKS units"
+
+R = Rm_mks / area 
+C = Cm_mks * area
+print "R=", round(R * 1E-6,2),"M ohms " "C=",round(C * 1E12,2), "picoFarads"
 
 RC = R * C   # timeconstant 
 print "RC=", RC * 1E6 ,"ms"
