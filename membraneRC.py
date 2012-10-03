@@ -17,7 +17,7 @@ print "Rm=",Rm_mks, "Cm=",Cm_mks," in MKS units"
 
 R = Rm_mks / area 
 C = Cm_mks * area
-print "R=", round(R * 1E-6,2),"M ohms " "C=",round(C * 1E12,2), "picoFarads"
+print "R=", round(R * 1E-6,2),"M ohms ", "C=",round(C * 1E12,2), "picoFarads"
 
 RC = R * C   # timeconstant 
 print "RC=", RC * 1E6 ,"ms"
