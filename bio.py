@@ -87,7 +87,7 @@ class Membrane(object) :
                  ( ion.external_concentration if ion.valance < 0 else ion.internal_concentration ) 
                     for ion in self.ions.values() ]) 
        if (pi == 0) :
-          return None
+          VM = None
        else :
           Vm = RToverF(T) * math.log (pe/ pi) 
        return Vm
