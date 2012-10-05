@@ -44,24 +44,52 @@ def dipole_potential(Io,sigma,r,d,theta) :
   return Io * d * math.cos(theta) / (4 * math.pi * sigma * r * r)
 
 
-def Nernst_ion_equilibrium (ion, T = 25) :
-   """ ion concentration across a membrane is represented by a tuple (symbol, valance, internal and external concentration )
-       symbol eg "K+"
-       valance is the sign of the ion 
-       internal is the molar concentration of the ion interior to the cell
-       exterior is the molar concentration of the ion external to the cell 
-       units of concentration are irrelevant since the ratio of concentrations is used but typically expressed in mol m-3
-       T is the temperature in degrees Celcius
-       return the symbol and the computed Voltage between interior and exterior
-   """
-   (symbol,valance,internal,external) = ion
-   Vm =( RToverF(T) / valance) * math.log(float(external) / float(internal))
-   return (symbol,Vm)
+class Ion(object) :
+    """ represents a snge ion on either side of a membrane
+    """
+    def __init__ (self,valance,internal,external,permeability=0) :
+       self.valance = valance
+       self.internal_concentration = float(internal)
+       self.external_concentration = float(external)
+       self.permeability =  float(permeability)
 
-def Nernst_membrane_equilibrium (ions,T = 25) :
-   """
-   ions is a list of ion concentrations 
-   return a list of ion potentials 
-   """
-   return [ Nernst_ion_equilibrium(ion,T) for ion in ions ]
+    def equilibrium_potential (self, T = 25) :
+       """ based on the Nerst equation
+       T is the temperature in degrees Celcius
+       see http://www.physiologyweb.com/calculators/nernst_potential_calculator.html
+       """
+       Vm = ( RToverF(T) / self.valance) * math.log(self.external_concentration / self.internal_concentration)
+       return Vm
+
+    def description(self,T) :
+       " ".join(("Valance", str(self.valance) ,
+            "External Concentration", str(self.external_concentration), "Internal Concentration", str(self.internal_concentration),
+            "Permeability",str(self.permeability), "Equilibrium  (20C)= ", str(self.equilibrium_potential(T)),"V"))
+
+class Membrane(object) :
+    """ represents a membrane as a dictionary of ions, indexed by their name
+    """
+    def __init__(self,ions) :
+       """ ions is a dictionary of ions with names as indexes
+       """
+       self.ions = ions
+
+    def reverse_potential (self,T = 25) :
+       """ reverse potential for a membrane based on the Goldman-Hodgkin-Katz equation 
+       T is the temperature in degrees Celcius
+ 
+       see http://www.physiologyweb.com/calculators/ghk_equation_calculator.html
+       """
+       pe = sum ( [ ion.permeability * 
+                  ( ion.external_concentration if ion.valance > 0 else ion.internal_concentration ) 
+                    for ion in self.ions.values() ]) 
+       pi = sum ( [ ion.permeability * 
+                 ( ion.external_concentration if ion.valance < 0 else ion.internal_concentration ) 
+                    for ion in self.ions.values() ]) 
+       if (pi == 0) :
+          return None
+       else :
+          Vm = RToverF(T) * math.log (pe/ pi) 
+       return Vm
+
 
