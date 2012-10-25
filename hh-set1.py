@@ -132,7 +132,7 @@ class Membrane (object) :
     def show(self) :
         print 'State at time', self.t
         for name in dir(self):
-           attr = getattr(self.obj,name)
+           attr = getattr(self,name)
            if not callable(attr) and not (name[0:2] == "__"):
               print name,':',attr
 
