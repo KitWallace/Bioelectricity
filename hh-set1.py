@@ -109,7 +109,7 @@ class Membrane (object) :
     def beta_m(self) :
 	return  4.0 * math.exp(-self.vm/18)
 
-# week 4 /slide 37  - simplified	
+# week 4 /slide 37  
     @property
     def alpha_h(self) :
 	return 0.07 * math.exp(-self.vm/20)
