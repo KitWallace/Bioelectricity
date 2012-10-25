@@ -63,8 +63,7 @@ class Membrane (object) :
     def GL (self) :	
         return  self.GL_max     
 
-# week 4 / slide 24-25
-    
+# week 4 / slide 24-25   
     @property 
     def dn (self) :
         return self.dt * (self.alpha_n * (1.0 - self.n) + self.beta_n * self.n) 
