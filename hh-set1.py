@@ -128,7 +128,8 @@ class Membrane (object) :
         new.Vm = self.Vm + self.dVm
         new.t = self.t + self.dt
         return new	
-	
+
+# print all variable values by inspecting the object's dictionary	
     def show(self) :
         print 'State at time', self.t
         for name in dir(self):
