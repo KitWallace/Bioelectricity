@@ -19,11 +19,11 @@ class Membrane (object) :
         self.GL_max  = 0.3 # maximum L channel conductance
 
 	# state variables
-        self.Vm =  Vm   
+        self.Vm =  Vm   # in millvolts
 	self.n  = n     # sodium channel particles
-        self.m  = m      # potassium channel particle 1
+        self.m  = m     # potassium channel particle 1
         self.h  = h     # potassium channel particle 2
-        self.dt = dt
+        self.dt = dt    # in milliseconds
         self.t = 0.0
         self.Istim = 0   # stimulus current = 0
 
