@@ -1,6 +1,5 @@
 
 import copy,math
-import reflect
 
 class Membrane (object) :
     def __init__(self, Vm, n, m, h, dt) :
@@ -131,7 +130,12 @@ class Membrane (object) :
         return new	
 	
     def show(self) :
-       reflect.Reflect(self).print_attributes()
+        print 'State at time', self.t
+        for name in dir(self):
+           attr = getattr(self.obj,name)
+           if not callable(attr) and not (name[0:2] == "__"):
+              print name,':',attr
+
 # set 1 with no stimulus current 
 # week 4 / slide 38
 squid= Membrane(Vm=-11.5, n=0.378, m=0.417, h=0.477, dt=50E-3)
